@@ -1,18 +1,20 @@
 <?
-/**
- * 
- */
 
 namespace engine\core;
+
+use engine\core\View;
 
 abstract class Controller {
 
 	public $route;
+	public $view;
 
 	public function __construct($route) {
 		$this->route = $route;
-		echo "<br>Проверки...</br>";
+		$this->view = new View($route);
+		echo "пРОВЕРКА";
 	}
 
 }
+
 ?>

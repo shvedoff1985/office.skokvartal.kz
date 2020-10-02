@@ -1,13 +1,10 @@
 <?
 
-/**
- * awdawd
- */
-
 //Класс роутинга
 
-
 namespace engine\core;
+
+use engine\core\View;
 
 class Router {
 
@@ -42,18 +39,20 @@ class Router {
 			$path = 'app\controllers\\'.ucfirst($this->params['controller'].'Controller');
 			if (class_exists($path)) {
 				$action = $this->params['action'].'Action';
+
 				if (method_exists($path, $action)) {
 					$controller = new $path($this->params);
 					$controller->$action();
 				}else{
-					echo "Action не найден";
+					View::errorCode(404);
 				}
 			}else{
-				echo "Не найден ".$path;
+				View::errorCode(404);
 			}
+		}else {
+			View::errorCode(404);
 		}
 	}
-
 }
 
 ?>
